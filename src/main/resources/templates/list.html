@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vehicles database</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/bootstrap.min.css" media="screen"/>
+</head>
+<body>
+<div class="container">
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h1>Vehicles List</h1>
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Brand</th>
+                        <th>Website</th>
+                        <th>Categories</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="vehicle : ${vehicles}">
+                        <td th:text="${vehicle.vehicleModel}"></td>
+                        <td th:text="${vehicle.vehicleBrand}"></td>
+                        <td th:text="${vehicle.website}"></td>
+                        <td>
+				    		<span th:each="category,iterStat : ${vehicle.categories}">
+				    			<span th:text="${category.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
+				    		</span>
+                        </td>
+                        <td>
+                            <a th:href="@{/addCategory/{id}(id=${vehicle.id})}" class="btn btn-sm btn-success">Add Category</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-7 col-sm-6">
+                  <a th:href="@{/add}" class="btn btn-default">New Record</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

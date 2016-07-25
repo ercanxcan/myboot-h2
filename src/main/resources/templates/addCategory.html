@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Category</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="/bootstrap.min.css" media="screen"/>
+</head>
+<body>
+	<div class="container">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-6">
+            <h3>Add Category</h3>
+            <form class="form-horizontal" th:action="@{/addCategory/{id}/categories(id=${vehicle.id})}" method="post" enctype="multipart/form-data" >
+            		<div class="form-group">
+	                    <label class="col-lg-2 control-label">Model</label>
+	                    <div class="col-lg-6">
+	                    	<input type="text" class="form-control" disabled="disabled" 
+	                    		th:value="${vehicle.vehicleModel}"/>
+	                    </div>
+                	</div>
+            		<div class="form-group">
+	                    <label class="col-lg-2 control-label">Brand</label>
+	                    <div class="col-lg-6">
+	                    	<input type="text" class="form-control" disabled="disabled"
+	                    		th:value="${vehicle.vehicleBrand}"/>
+	                    </div>
+                	</div>
+            		<div class="form-group">
+	                    <label class="col-lg-2 control-label">Web Site</label>
+	                    <div class="col-lg-6">
+	                    	<input type="text" class="form-control" disabled="disabled" 
+	                    		th:value="${vehicle.website}"/>
+	                    </div>
+                	</div>
+            		<div class="form-group">
+						<label class="col-lg-2 control-label">Vehicle Categories</label>
+						<div class="col-lg-6">
+							<div th:each="category : ${vehicle.categories}">
+								<span th:text="${category.name}" /> - <span th:text="${category.description}" />
+							</div>
+	                    </div>
+	                </div>
+            		<div class="form-group">
+						<label class="col-lg-2 control-label">Categories</label>
+						<div class="col-lg-6">
+								<select name="categoryId" class="form-control">
+									<option th:each="category : ${categories}"
+										th:value="${category.id}"
+										th:text="${category.description}">Category</option>
+								</select>
+	                    </div>
+                	</div>
+					<div class="form-group">
+						<div class="col-lg-8 col-lg-offset-2">
+							<button type="submit" class="btn btn-primary" name="button">Add Category</button>
+							<a th:href="@{/}" class="btn btn-default">Vehicle List</a>
+						</div>
+					</div>
+            </form>
+          </div>
+        </div>
+      </div>
+	</div>
+
+</body>
+</html>
